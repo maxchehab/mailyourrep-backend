@@ -39,4 +39,10 @@ var routes = Routes{
 		"/",
 		HelloWorld,
 	},
+	Route{
+		"Send",
+		"POST",
+		"/send",
+		Send,
+	},
 }
