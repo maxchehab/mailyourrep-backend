@@ -11,6 +11,7 @@ clean:
 install:
 	go get github.com/gorilla/mux
 	go get github.com/ttacon/chalk
+	go get github.com/stripe/stripe-go
 
 run: dist/server.exe
 	./dist/server.exe

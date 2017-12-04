@@ -19,6 +19,25 @@ func Send(w http.ResponseWriter, r *http.Request) {
 	}
 	fmt.Fprintln(w, requestData)
 
-	reps, err := GetReps(requestData)
+	reps, err := GetReps(requestData, requestData.Reps)
+	if err != nil {
+		Error(err)
+		return
+	}
+
+	err = Payment(requestData.StripeToken, len(reps))
+	if err != nil {
+		Error(err)
+		return
+	}
+
+	for _, rep := range reps {
+		err = Lob(requestData, rep)
+		if err != nil {
+			Error(err)
+			return
+		}
+	}
+
 	fmt.Fprintln(w, reps)
 }
